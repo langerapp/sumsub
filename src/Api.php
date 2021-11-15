@@ -128,10 +128,10 @@ class Api
      * @return string
      * @throws GuzzleException
      */
-    public function getAccessToken(string $userId): string
+    public function getAccessToken(string $userId, string $levelName = 'basic-kyc-level'): string
     {
         // https://developers.sumsub.com/api-reference/#access-tokens-for-sdks
-        $url = "/resources/accessTokens?userId=" . $userId;
+        $url = "/resources/accessTokens?userId=" . $userId . "&levelName=" . $levelName;
         $request = new Request('POST', SUMSUB_BASE_URL.$url);
         $response = $this->sendHttpRequest($request, $url)->getBody();
         return json_decode($response, true)['token'];
